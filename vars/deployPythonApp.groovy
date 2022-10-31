@@ -1,4 +1,4 @@
-def deployPythonApp(var1)
+def call(var1)
 {
 git url: 'https://github.com/amigo-nishant/Python-hello-world.git', branch: "${var1}"
  try {

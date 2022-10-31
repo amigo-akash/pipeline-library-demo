@@ -1,4 +1,4 @@
-def deployNodeApp (var1)
+def call (var1)
 {
     git url: 'https://github.com/amigo-nishant/Simple-hello-world-nodeJS.git', branch: "${var1}"
     try {

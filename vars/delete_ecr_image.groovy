@@ -1,7 +1,7 @@
 def call (var1,var2)
 {
 
-REGION="ap-south-1"
+REGION="eu-west-2"
 
 
 type jq >/dev/null 2>&1 || { echo >&2 "The jq utility is required for this script to run."; exit 1; }

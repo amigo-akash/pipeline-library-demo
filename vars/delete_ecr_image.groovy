@@ -1,30 +1,15 @@
 def call (var1,var2)
 {
 
-#!/bin/bash
-
-# Script to clean ECR repos
-
-## Usage:
-## ./clean-old-ecr-images.sh <IMAGE-REPO-NAME> <WEEKS-TO-KEEP>
-##
-## Non-interactive, for running in cron or your C.I.:
-## echo "y" | ./clean-old-ecr-images.sh <IMAGE-REPO-NAME> <WEEKS-TO-KEEP>
-
-## Dependencies
-## Requires jq and aws command line
-## aws credentials are also needed to access the repo. These can be set up using the "aws configure" command.
-## Set the region in the parameters below.
-
 REGION="ap-south-1"
 
-# Check if jq is available
+
 type jq >/dev/null 2>&1 || { echo >&2 "The jq utility is required for this script to run."; exit 1; }
 
-# Check if aws cli is available
+
 type aws >/dev/null 2>&1 || { echo >&2 "The aws cli is required for this script to run."; exit 1; }
 
-# Check number of arguments parsed
+
 if [ $# -ne 2 ]; then
 	        echo "Useage ./clean-old-ecr-images.sh <IMAGE-REPO-NAME> <WEEKS-TO-KEEP>"
 		        exit 1

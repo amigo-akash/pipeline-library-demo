@@ -14,7 +14,7 @@ withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${
 catch(e) {}
     post { 
     always {
-      sh 'docker-compose down --remove-orphans'
+      sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/dev-server.pem ec2-user@ec2-35-176-254-143.eu-west-2.compute.amazonaws.com sudo docker-compose down --remove-orphans'
 }
     }
 }

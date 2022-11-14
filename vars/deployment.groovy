@@ -1,6 +1,6 @@
-def deployMyApp(service,env,tag,repo,ip_address) {
+def deployMyApp(service,env,tag,repo,ip_address,pem_file) {
                 pushTOECR(repo,tag)
-                deployToInstance(repo,tag,ip_address)
+                deployToInstance(repo,tag,ip_address,pem_file)
                 echo 'Deployed ${service} app to the ${env} environment successfully'
             }
 
@@ -14,8 +14,8 @@ def pushTOECR(repo,tag) {
 }
 
 
-def deployToInstance(repo,tag,ip_address)
+def deployToInstance(repo,tag,ip_address,pem_file)
 {
-          sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/dev-server.pem ec2-user@ec2-"${ip_address}".eu-west-2.compute.amazonaws.com aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 927491280662.dkr.ecr.eu-west-2.amazonaws.com'
-          sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/dev-server.pem ec2-user@ec2-"${ip_address}".eu-west-2.compute.amazonaws.com docker run -d -p 8081:4000 927491280662.dkr.ecr.eu-west-2.amazonaws.com/"${repo}":"${tag}"'
+          sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/"${pem_file}" ec2-user@ec2-"${ip_address}".eu-west-2.compute.amazonaws.com aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 927491280662.dkr.ecr.eu-west-2.amazonaws.com'
+          sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/"${pem_file}" ec2-user@ec2-"${ip_address}".eu-west-2.compute.amazonaws.com docker run -d -p 8081:4000 927491280662.dkr.ecr.eu-west-2.amazonaws.com/"${repo}":"${tag}"'
 }
